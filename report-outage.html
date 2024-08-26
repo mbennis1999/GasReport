@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Outage Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>Report an Outage</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li> <!-- Link back to the home page -->
+                    <li><a href="#">Service Details</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="report-outage.html">Report Outage Form</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="outage-form-section">
+            <h2>Report an Outage</h2>
+            <form id="outageForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name">
+                    <span class="error-message" id="nameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" name="phone" placeholder="Enter your 10-digit phone number">
+                    <span class="error-message" id="phoneError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email" placeholder="Enter your email">
+                    <span class="error-message" id="emailError"></span>
+                </div>
+
+                <button type="submit" class="submit-button">Submit</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('outageForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            let isValid = true;
+
+            // Name validation: Only letters allowed
+            const nameInput = document.getElementById('name');
+            const nameError = document.getElementById('nameError');
+            if (!/^[A-Za-z\s]+$/.test(nameInput.value)) {
+                nameError.textContent = 'Name can only contain letters.';
+                nameError.style.color = 'red';
+                isValid = false;
+            } else {
+                nameError.textContent = ''; // Clear error
+            }
+
+            // Phone validation: Must be a 10-digit number
+            const phoneInput = document.getElementById('phone');
+            const phoneError = document.getElementById('phoneError');
+            if (!/^\d{10}$/.test(phoneInput.value)) {
+                phoneError.textContent = 'Phone number must be exactly 10 digits.';
+                phoneError.style.color = 'red';
+                isValid = false;
+            } else {
+                phoneError.textContent = ''; // Clear error
+            }
+
+            // Email validation: Must contain "@" and "."
+            const emailInput = document.getElementById('email');
+            const emailError = document.getElementById('emailError');
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+                emailError.textContent = 'Please enter a valid email address.';
+                emailError.style.color = 'red';
+                isValid = false;
+            } else {
+                emailError.textContent = ''; // Clear error
+            }
+
+            // If form is valid, you can submit it (for now, we'll just log a message)
+            if (isValid) {
+                alert('Form submitted successfully!');
+            }
+        });
+    </script>
+</body>
+</html>
